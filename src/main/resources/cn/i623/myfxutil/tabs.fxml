@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<TabPane xmlns:fx="http://javafx.com/fxml/1" fx:id="personTable" prefHeight="457.0" prefWidth="657.0"
+         xmlns="http://javafx.com/javafx/17" fx:controller="cn.i623.myfxutil.contorl.TabController">
+    <tabs>
+        <Tab text="日志信息抽取">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="105.0" prefWidth="533.0"/>
+            </content>
+        </Tab>
+        <Tab text="text1">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="105.0" prefWidth="533.0">
+                    <children>
+                        <TextField layoutX="139.0" layoutY="36.0" prefHeight="23.0" prefWidth="159.0"/>
+                        <Button layoutX="233.0" layoutY="241.0" onAction="#onHelloButtonClick" prefHeight="0.0"
+                                prefWidth="68.0" text="登录"/>
+                        <Label layoutX="67.0" layoutY="40.0" prefHeight="15.0" prefWidth="74.0" text="账号"/>
+                        <Label layoutX="67.0" layoutY="74.0" text="密码"/>
+                        <PasswordField layoutX="139.0" layoutY="70.0"/>
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+        <Tab text="test2">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="105.0" prefWidth="533.0">
+                    <children>
+                        <TextField layoutX="36.0" layoutY="36.0" prefHeight="23.0" prefWidth="375.0"/>
+                        <Button layoutX="411.0" layoutY="36.0" onAction="#onHelloButtonClick" prefHeight="0.0"
+                                prefWidth="68.0" text="你好按钮!"/>
+                        <!--                   <Label fx:id="welcomeText" layoutX="254.0" layoutY="6.0" text="标签tab" />-->
+<!--                        <HTMLEditor-->
+<!--                                htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;"-->
+<!--                                layoutY="78.0" prefHeight="251.0" prefWidth="533.0" AnchorPane.leftAnchor="50.0"-->
+<!--                                AnchorPane.topAnchor="100.0"/>-->
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>

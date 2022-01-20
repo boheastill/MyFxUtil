@@ -1,0 +1,19 @@
+spring:
+  #  main:
+  #    allow-bean-definition-overriding: true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ie_ocr?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: root
+    password: root
+
+
+mybatis:
+  mapper-locations: classpath:/mapper/*.xml
+
+
+server:
+  port: 8080
+
+
+

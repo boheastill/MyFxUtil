@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" minHeight="0.0" minWidth="0.0" prefHeight="471.0" prefWidth="533.0"
+            xmlns="http://javafx.com/javafx/17" fx:controller="cn.i623.myfxutil.contorl.TabController">
+    <children>
+        <Label fx:id="welcomeText" layoutX="254.0" layoutY="6.0" text="标签tj。。"/>
+
+        <Label fx:id="contain" layoutX="67.0" layoutY="58.0" prefHeight="15.0" prefWidth="74.0" text="包含关键词"/>
+        <TextField fx:id="containText" layoutX="149.0" layoutY="54.0" prefHeight="23.0" prefWidth="358.0"/>
+
+        <Label fx:id="start" layoutX="67.0" layoutY="93.0" prefHeight="15.0" prefWidth="74.0" text="开始关键词"/>
+        <TextField fx:id="startText" layoutX="149.0" layoutY="89.0" prefHeight="23.0" prefWidth="358.0"/>
+
+        <Label fx:id="end" layoutX="70.0" layoutY="133.0" prefHeight="15.0" prefWidth="68.0" text="结束关键词"/>
+        <TextField fx:id="endText" layoutX="149.0" layoutY="129.0" prefHeight="23.0" prefWidth="358.0"/>
+
+        <Label fx:id="path" layoutX="80.0" layoutY="170.0" text="路径"/>
+        <TextField fx:id="pathText" layoutX="149.0" layoutY="166.0" prefHeight="23.0" prefWidth="358.0"/>
+
+        <Label fx:id="outTitle" layoutX="67.0" layoutY="200.0" prefHeight="23.0" prefWidth="88.0" text="程序输出"/>
+        <TextField fx:id="outPathText" layoutX="149.0" layoutY="200.0" prefHeight="23.0" prefWidth="358.0"/>
+        <TextArea fx:id="outText" layoutX="67.0" layoutY="236.0" prefHeight="148.0" prefWidth="437.0"/>
+
+        <Button fx:id="exeButton" layoutX="187.0" layoutY="406.0" onAction="#onExeButtonClick" prefHeight="0.0"
+                prefWidth="68.0" text="查询"/>
+    </children>
+</AnchorPane>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.i623.myspringutil.mapper.KafkaMsgMapper">
+    <resultMap id="BaseResultMap" type="cn.i623.myspringutil.domain.KafkaMsg">
+        <!--@mbg.generated-->
+        <!--@Table kafuka_msg-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="msg" jdbcType="LONGVARCHAR" property="msg"/>
+        <result column="send_time" jdbcType="TIMESTAMP" property="sendTime"/>
+        <result column="msg_id" jdbcType="BIGINT" property="msgId"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="is_del" jdbcType="INTEGER" property="isDel"/>
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime"/>
+        <result column="topic_name" jdbcType="VARCHAR" property="topicName"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, msg, send_time, msg_id, `status`, is_del, created_time, topic_name
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <!--@mbg.generated-->
+        select
+        <include refid="Base_Column_List"/>
+        from kafuka_msg
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        <!--@mbg.generated-->
+        delete from kafuka_msg
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.i623.myspringutil.domain.KafkaMsg"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into kafuka_msg (msg, send_time, msg_id,
+        `status`, is_del, created_time,
+        topic_name)
+        values (#{msg,jdbcType=LONGVARCHAR}, #{sendTime,jdbcType=TIMESTAMP}, #{msgId,jdbcType=BIGINT},
+        #{status,jdbcType=INTEGER}, #{isDel,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP},
+        #{topicName,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.i623.myspringutil.domain.KafkaMsg"
+            useGeneratedKeys="true">
+        <!--@mbg.generated-->
+        insert into kafuka_msg
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="msg != null">
+                msg,
+            </if>
+            <if test="sendTime != null">
+                send_time,
+            </if>
+            <if test="msgId != null">
+                msg_id,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="isDel != null">
+                is_del,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="topicName != null">
+                topic_name,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="msg != null">
+                #{msg,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="sendTime != null">
+                #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="msgId != null">
+                #{msgId,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="isDel != null">
+                #{isDel,jdbcType=INTEGER},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="topicName != null">
+                #{topicName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.i623.myspringutil.domain.KafkaMsg">
+        <!--@mbg.generated-->
+        update kafuka_msg
+        <set>
+            <if test="msg != null">
+                msg = #{msg,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="sendTime != null">
+                send_time = #{sendTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="msgId != null">
+                msg_id = #{msgId,jdbcType=BIGINT},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="isDel != null">
+                is_del = #{isDel,jdbcType=INTEGER},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="topicName != null">
+                topic_name = #{topicName,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.i623.myspringutil.domain.KafkaMsg">
+        <!--@mbg.generated-->
+        update kafuka_msg
+        set msg = #{msg,jdbcType=LONGVARCHAR},
+        send_time = #{sendTime,jdbcType=TIMESTAMP},
+        msg_id = #{msgId,jdbcType=BIGINT},
+        `status` = #{status,jdbcType=INTEGER},
+        is_del = #{isDel,jdbcType=INTEGER},
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+        topic_name = #{topicName,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>
