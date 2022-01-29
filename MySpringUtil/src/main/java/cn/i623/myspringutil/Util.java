@@ -21,12 +21,15 @@ public class Util {
         }
     }
 
-    public static boolean writejavaCode(File file, List<String> rawList, String title) {
+    public static boolean writejavaCode(File file, List<String> rawList, String title, Boolean append) {
         boolean flag = false;
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, append), "UTF-8"));) {
             file.createNewFile();
             bufferedWriter.write(title);
             bufferedWriter.newLine();
+            if (rawList == null) {
+                return false;
+            }
             for (String raw : rawList) {
                 bufferedWriter.write(raw);
                 bufferedWriter.newLine();
@@ -38,6 +41,7 @@ public class Util {
             return flag;
         }
     }
+
 
     public static List<String> codeTemp(String nocutfilename, String packName) {
         java.util.List<String> rawList = new ArrayList<>();

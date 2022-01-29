@@ -13,49 +13,91 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+/*传入目录页，保存该书*/
 public class GetResponse {
-//-参数-------------------------
-
+    //-参数-------------------------
     private final static String WEB_SITE = "https://m.soxs.cc";
     private final static String CATA_URL = "/WoHeChongZhenChengLiaoHeHuoRen";
+    private final static String SAVE_BASE_FILE = "D:\\down\\webGet\\";
+    private final static String FILE_NAME = "测试1";
+    private final static String TRAIL = ".txt";
+    private static List<String> timeList = new LinkedList<>();
     private static List<AloneTitle> catalogue;
+
+
+    //-测试-------------------------
+    public static void main(String[] arg) throws IOException {
+        uBookIsMine();
+        System.out.println("执行完毕");
+    }
+
+
+    //-公有-------------------------
+    public static void uBookIsMine() throws IOException {
+        recordTime(ProcessNodeEnum.TASK_START);
+        List<AloneTitle> catalogue = getCatalogue();
+        StringBuilder sb = new StringBuilder();
+        for (AloneTitle at : catalogue) {
+            recordTime(ProcessNodeEnum.PAGE_START);
+            Page page = getPage(WEB_SITE, at.getPageUrl());
+            if (!page.getNormal()) {
+                sb.append(page + "\n");
+            }
+            recordTime(ProcessNodeEnum.SAVE_START);
+            save2File(page);
+        }
+        recordTime(ProcessNodeEnum.TASK_END);
+//        System.out.println("问题：" + sb);
+        //保存报告文件
+        String pathname = SAVE_BASE_FILE + FILE_NAME + "_报告" + TRAIL;
+        File file = new File(pathname);
+        if (file.createNewFile()) {
+            Util.writejavaCode(file, timeList, "问题：" + sb + "\n报告：\n", false);
+        }
+    }
 
     /*获取单章内容*/
     public static Page getPage(String website, String pageurl) {
         Page page = new Page();
+        Integer count = 0;
         List rawList = new LinkedList();
         String url = website + pageurl;
+
         String result = getResult(url);
+        recordTime(ProcessNodeEnum.PRISE_START);
         // 使用 jsoup 解析
         Document doc = Jsoup.parse(result);
         Element body = doc.body();
 //        标题
         Node node1 = body.childNode(3);
         String s1 = node1.childNode(0).toString();
-        page.setTitle(s1);
 //        正文
         Node node2 = body.childNode(5);
         for (int i = 0; i < node2.childNodes().size() - 1; i++) {
             String s = node2.childNode(i).childNode(0).toString();
 //            System.out.println(s);
+            count += s.length();
             rawList.add(s);
         }
 //        链接
         Node node3 = body.childNode(6);
-//        System.out.println(node3);
-//        String herf = node.toString();
-        String herfml = node3.childNode(2).attributes().get("href").toString();
-//        System.out.println(herfml);
+//        String herfml = node3.childNode(2).attributes().get("href").toString();
         String herf = node3.childNode(4).attributes().get("href").toString();
-//        System.out.println(herf);
-//        rawList.add(rawList);
+        //写入
+        if (rawList.size() > 20 && count > 1000) {
+            page.setNormal(true);
+        }
         page.setNextHref(herf);
-
+        page.setTitle(s1);
         page.setRawList(rawList);
+        page.setCount(count);
+        page.setRaw(rawList.size());
         return page;
     }
 
@@ -110,6 +152,42 @@ public class GetResponse {
         return result;
     }
 
+    /*获取完整目录*/
+    public static List<AloneTitle> getCatalogue() {
+        List<AloneTitle> allSplitCate = getAllSplitCate(WEB_SITE, CATA_URL);
+        for (AloneTitle splitCate : allSplitCate) {
+            String cataUrl = splitCate.getPageUrl();
+            addCatalogue(WEB_SITE, cataUrl);
+        }
+        return catalogue;
+    }
+
+    /*
+     * 传入：流程节点,时间（指定）
+     * **/
+    public static void recordTime(ProcessNodeEnum processNode) {
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss:SSS");
+        String nowTime = df.format(LocalDateTime.now());
+//        timeMap.put(processNode, nowTime);
+        timeList.add(processNode.getName() + "\t" + nowTime);
+    }
+
+    //-私有-------------------------
+    private static void save2File(Page page) throws IOException {
+        String pathname = SAVE_BASE_FILE + FILE_NAME + ".txt";
+//        String pathname = BASE_FILE + page.getTitle() + ".txt";
+        File file = new File(pathname);
+        if (file.exists()) {
+//            System.out.println("    存在");
+            Util.writejavaCode(file, page.getRawList(), page.getTitle(), true);
+        } else {
+            System.out.println("    X");
+            if (file.createNewFile()) {
+                Util.writejavaCode(file, page.getRawList(), page.getTitle(), false);
+            }
+        }
+    }
+
     /*补充目录*/
     private static List<AloneTitle> addCatalogue(String website, String pageurl) {
         if (catalogue == null) {
@@ -137,8 +215,6 @@ public class GetResponse {
         return catalogue;
     }
 
-//-私有-------------------------
-
     /*获取目录的所有分页*/
     private static List<AloneTitle> getAllSplitCate(String website, String pageurl) {
         List<AloneTitle> rawList = new LinkedList();
@@ -164,42 +240,35 @@ public class GetResponse {
 
     private static String getResult(String url) {
         String result = "";
-        //todo 重试机制
-        if (result.equals("")) {
+        int i = 0;
+        //如果返回长度0，重试10次 todo 可以加时间戳来避免缓存
+        do {
             result = sendGet(url, "");
-        }
+            i++;
+        } while (result.length() == 0 || i < 10);
         return result;
     }
 
-    //-测试-------------------------
-    public static void main(String[] arg) throws IOException {
-        List<AloneTitle> catalogue = getCatalogue();
-        Page page = getPage(WEB_SITE, catalogue.get(0).getPageUrl());
-        save2File(page);
-        System.out.println(page);
-    }
+    public enum ProcessNodeEnum {
+        TASK_START("任务开始"), TASK_END("任务结束"),
+        DOWNLOAD_START("下载开始"), DOWNLOAD_END("下载结束"),
+        PRISE_START("解析处理开始"), PRISE_END("解析处理结束"),
+        TEST1("测试节点1"), TEST2("测试节点2"),
+        PAGE_START("章节开始"), PAGE_END("章节结束"),
+        SAVE_START("保存开始"), SAVE_END("保存结束");
+//        _START("开始"), _END("结束"),
 
-    private static void save2File(Page page) throws IOException {
-        File file = new File("D:\\down\\webGet\\" + page.getTitle() + ".txt");
-        if (file.exists()) {
-            System.out.println("    存在");
-        } else {
-            System.out.println("    X");
-            if (file.createNewFile()) {
-                Util.writejavaCode(file, page.getRawList(), page.getTitle());
-            }
-        }
-    }
+        private final String name;
 
-    //-公有-------------------------
-    /*获取完整目录*/
-    public static List<AloneTitle> getCatalogue() {
-        List<AloneTitle> allSplitCate = getAllSplitCate(WEB_SITE, CATA_URL);
-        for (AloneTitle splitCate : allSplitCate) {
-            String cataUrl = splitCate.getPageUrl();
-            addCatalogue(WEB_SITE, cataUrl);
+        private ProcessNodeEnum(String name) {
+            this.name = name;
+
         }
-        return catalogue;
+
+        public String getName() {
+            return name;
+        }
+
     }
 
     //-对象-------------------------
@@ -208,6 +277,9 @@ public class GetResponse {
         List<String> rawList;
         String title;
         String nextHref;
+        Boolean normal = false;
+        Integer count;
+        Integer Raw;
 
         @Override
         public String toString() {
@@ -215,6 +287,9 @@ public class GetResponse {
             sb.append("\"rawList\":").append(rawList);
             sb.append(",\"title\":\"").append(title).append('\"');
             sb.append(",\"nextHref\":\"").append(nextHref).append('\"');
+            sb.append(",\"normal\":").append(normal);
+            sb.append(",\"count\":").append(count);
+            sb.append(",\"Raw\":").append(Raw);
             sb.append('}');
             return sb.toString();
         }
@@ -235,4 +310,5 @@ public class GetResponse {
             return sb.toString();
         }
     }
+
 }
