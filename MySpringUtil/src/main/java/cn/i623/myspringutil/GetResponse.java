@@ -19,7 +19,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-/*传入目录页，保存该书*/
+/*传入目录页，保存该书
+*
+* //todo 找到目录，按目录逐章保存，最后io
+*
+* */
 public class GetResponse {
     //-参数-------------------------
     private final static String WEB_SITE = "https://m.soxs.cc";
