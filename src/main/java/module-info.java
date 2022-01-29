@@ -7,7 +7,8 @@ module cn.i623.myfxutil {
 
     requires org.apache.commons.codec;
     requires poi;
-    requires poi.ooxml;
+
+
     exports cn.i623.myfxutil;
     exports cn.i623.myfxutil.contorl;
 

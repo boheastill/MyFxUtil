@@ -1,16 +1,13 @@
+/*
 package cn.i623.myfxutil.test;
 
 
 import cn.i623.myfxutil.myinterface.IDCardInterface;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static cn.i623.myfxutil.util.ExcelUtils.getCellFormatValue;
-import static cn.i623.myfxutil.util.ExcelUtils.readExcel;
+
 
 
 public class IDCard implements IDCardInterface {
@@ -109,10 +106,12 @@ public class IDCard implements IDCardInterface {
             return tl;
         }
 
-        /*校验是否符合身份证规则
+        */
+/*校验是否符合身份证规则
          * 输入：长度为18的字符串，非数字的默认按罗马X 处理
          * 输出：符合规则（是/否）
-         * */
+         * *//*
+
         static Boolean verfify(String code) {
             int valueCount = 0;
             for (int i = 0; i < code.length(); i++) {
@@ -196,3 +195,4 @@ public class IDCard implements IDCardInterface {
         }
     }
 }
+*/

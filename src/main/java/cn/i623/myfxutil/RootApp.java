@@ -5,7 +5,7 @@ import cn.i623.myfxutil.myinterface.IDCardInterface;
 import cn.i623.myfxutil.tabElement.Director;
 import cn.i623.myfxutil.tabElement.IdCardBuilder;
 import cn.i623.myfxutil.tabElement.TabProduct;
-import cn.i623.myfxutil.test.IDCard;
+
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -79,9 +79,9 @@ public class RootApp extends Application {
         tabProduct.put2TabList(tabList);
 
 
-        IDCardInterface idCard = new IDCard();
-        String radomIdCard = idCard.getRadomIdCard();
-        Boolean aBoolean = idCard.cheakIdCard(radomIdCard);
+//        IDCardInterface idCard = new IDCard();
+//        String radomIdCard = idCard.getRadomIdCard();
+//        Boolean aBoolean = idCard.cheakIdCard(radomIdCard);
 
 //        addUnicodeTab(tabList);
 //        addTab(tabList);

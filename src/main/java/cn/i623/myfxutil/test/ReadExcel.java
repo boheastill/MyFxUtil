@@ -1,3 +1,4 @@
+/*
 package cn.i623.myfxutil.test;
 
 
@@ -10,11 +11,13 @@ import java.io.IOException;
 
 import static cn.i623.myfxutil.util.ExcelUtils.readExcel;
 
+*/
 /**
  * @Auther: zjk
  * @Date: 2019/8/30
  * @Description:
- */
+ *//*
+
 public class ReadExcel {
     public static void main(String[] args) {
         try {
@@ -37,4 +40,4 @@ public class ReadExcel {
         }
 
     }
-}
+}*/

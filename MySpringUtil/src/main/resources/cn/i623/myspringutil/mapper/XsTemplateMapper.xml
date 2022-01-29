@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.i623.myspringutil.mapper.XsTemplateMapper">
+  <resultMap id="BaseResultMap" type="cn.i623.myspringutil.domain.XsTemplate">
+    <!--@mbg.generated-->
+    <!--@Table xs_template-->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="template_name" jdbcType="VARCHAR" property="templateName" />
+    <result column="template_sn" jdbcType="VARCHAR" property="templateSn" />
+    <result column="is_del" jdbcType="INTEGER" property="isDel" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="template_package" jdbcType="VARCHAR" property="templatePackage" />
+    <result column="node" jdbcType="VARCHAR" property="node" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    id, template_name, template_sn, is_del, created_time, `type`, template_package, node
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from xs_template
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <!--@mbg.generated-->
+    delete from xs_template
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.i623.myspringutil.domain.XsTemplate" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into xs_template (template_name, template_sn, is_del, 
+      created_time, `type`, template_package, 
+      node)
+    values (#{templateName,jdbcType=VARCHAR}, #{templateSn,jdbcType=VARCHAR}, #{isDel,jdbcType=INTEGER}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{type,jdbcType=INTEGER}, #{templatePackage,jdbcType=VARCHAR}, 
+      #{node,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.i623.myspringutil.domain.XsTemplate" useGeneratedKeys="true">
+    <!--@mbg.generated-->
+    insert into xs_template
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="templateName != null">
+        template_name,
+      </if>
+      <if test="templateSn != null">
+        template_sn,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="templatePackage != null">
+        template_package,
+      </if>
+      <if test="node != null">
+        node,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="templateName != null">
+        #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="templateSn != null">
+        #{templateSn,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="templatePackage != null">
+        #{templatePackage,jdbcType=VARCHAR},
+      </if>
+      <if test="node != null">
+        #{node,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.i623.myspringutil.domain.XsTemplate">
+    <!--@mbg.generated-->
+    update xs_template
+    <set>
+      <if test="templateName != null">
+        template_name = #{templateName,jdbcType=VARCHAR},
+      </if>
+      <if test="templateSn != null">
+        template_sn = #{templateSn,jdbcType=VARCHAR},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="templatePackage != null">
+        template_package = #{templatePackage,jdbcType=VARCHAR},
+      </if>
+      <if test="node != null">
+        node = #{node,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.i623.myspringutil.domain.XsTemplate">
+    <!--@mbg.generated-->
+    update xs_template
+    set template_name = #{templateName,jdbcType=VARCHAR},
+      template_sn = #{templateSn,jdbcType=VARCHAR},
+      is_del = #{isDel,jdbcType=INTEGER},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      `type` = #{type,jdbcType=INTEGER},
+      template_package = #{templatePackage,jdbcType=VARCHAR},
+      node = #{node,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="findTemplatePackageByTemplateSn" resultType="java.lang.String">
+        <!--@mbg.generated-->
+        select template_package
+        from xs_template
+        where template_sn=#{templateSn,jdbcType=VARCHAR}
+    </select>
+</mapper>
