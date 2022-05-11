@@ -1,10 +1,10 @@
-package cn.i623.myspringutil;
+package cn.i623.myspringutil.fun;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Util {
+public class CodeGennerate {
     public static boolean writejavaCode(File file, List<String> rawList) {
         boolean flag = false;
         try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));) {
@@ -47,14 +47,26 @@ public class Util {
         java.util.List<String> rawList = new ArrayList<>();
         rawList.add("package com.turing.engine.scripts." + packName + ".filter");
         rawList.add("");
-        rawList.add("import com.turing.engine.scripts.node0101C50001.filter.RegPostProcess");
+        rawList.add("import com.turing.engine.scripts.node0101C50001.filter.SingleRegularPostProcess");
+        rawList.add("import java.util.regex.Pattern");
+        rawList.add("//import com.turing.vo.out.DependParamsVO");
+        rawList.add("//import com.turing.vo.out.TaskElementVO");
         rawList.add("");
-        rawList.add("/*默认走父类逻辑，并用子类静态代码块里给父类的正则，返回给java正则捞到的第一个值*/");
+        rawList.add("/*默认走父类，用了子类在usePatternReg给父类的正则，最终返回java该正则在全文捞到的第一个值*/");
         rawList.add("");
-        rawList.add("class " + nocutfilename + " extends RegPostProcess {");
-        rawList.add("    static {");
-        rawList.add("        new RegPostProcess(~/(?<=前置)[^,.，。]*?(?=后置)/)");
+        rawList.add("class " + nocutfilename + " extends SingleRegularPostProcess {");
+        rawList.add("    @Override");
+        rawList.add("    Pattern usePatternReg() {");
+        rawList.add("        return ~/(?<=前置)[^,.，。]*?(?=后置)/");
         rawList.add("    }");
+        rawList.add("/*    @Override");
+        rawList.add("    List<TaskElementVO.DrawResultVO> modelDeal(List<TaskElementVO.DrawResultVO> resultVOs, DependParamsVO dependParams) {");
+        rawList.add("        return resultVOs");
+        rawList.add("    }*/");
+        rawList.add("/*    @Override");
+        rawList.add("    List<Map<String, String>> postProcess(String rawText, List<TaskElementVO.DrawResultVO> resultVOs, DependParamsVO dependParams) {");
+        rawList.add("        return null");
+        rawList.add("    }*/");
         rawList.add("}");
         return rawList;
     }

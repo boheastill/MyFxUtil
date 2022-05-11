@@ -1,9 +1,11 @@
 package cn.i623.myspringutil.service;
 
-import org.springframework.stereotype.Service;
-import javax.annotation.Resource;
 import cn.i623.myspringutil.domain.XsTemplate;
-import cn.i623.myspringutil.mapper.XsTemplateMapper;import java.util.List;
+import cn.i623.myspringutil.mapper.XsTemplateMapper;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class XsTemplateService {
@@ -44,5 +46,11 @@ public class XsTemplateService {
     public List<String> findTemplatePackageByTemplateSn(String templateSn) {
         return xsTemplateMapper.findTemplatePackageByTemplateSn(templateSn);
     }
+
+
+    public List<String> selectTemplateSnByNode(String node) {
+        return xsTemplateMapper.selectTemplateSnByNode(node);
+    }
 }
+
 

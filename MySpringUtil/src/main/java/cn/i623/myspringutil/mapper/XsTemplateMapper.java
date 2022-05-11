@@ -1,8 +1,9 @@
 package cn.i623.myspringutil.mapper;
 
 import cn.i623.myspringutil.domain.XsTemplate;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface XsTemplateMapper {
     int deleteByPrimaryKey(Integer id);
@@ -18,4 +19,6 @@ public interface XsTemplateMapper {
     int updateByPrimaryKey(XsTemplate record);
 
     List<String> findTemplatePackageByTemplateSn(@Param("templateSn") String templateSn);
+
+    List<String> selectTemplateSnByNode(@Param("node") String node);
 }

@@ -229,4 +229,11 @@
         select ele_sn
         from xs_element
     </select>
+  <update id="updateElementcodeAndGroupAndParentgroupByTemplateSnAndEleName">
+        <!--@mbg.generated-->
+        update xs_element
+        set elementCode=#{updatedElementcode,jdbcType=VARCHAR}, `group`=#{updatedGroup,jdbcType=VARCHAR},
+        parentGroup=#{updatedParentgroup,jdbcType=VARCHAR}
+        where template_sn=#{templateSn,jdbcType=VARCHAR} and ele_name=#{eleName,jdbcType=VARCHAR}
+    </update>
 </mapper>

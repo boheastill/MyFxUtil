@@ -14,10 +14,6 @@ import java.io.IOException;
  *
  * @author xxxxx
  * //    //根据数据库生成脚本
-
- *
- *
- *
  */
 @RestController
 @RequestMapping("xs_element")
@@ -42,6 +38,12 @@ public class XsElementController {
     @GetMapping("selectPath")
     public String selectPath() throws IOException {
         return xsElementService.selectPath();
+    }
+
+    @GetMapping("updatedb")
+    public String updatedb() throws IOException {
+        xsElementService.updateElementcodeAndGroupAndParentgroupByTemplateSnAndEleName();
+        return "结束";
     }
 
 }

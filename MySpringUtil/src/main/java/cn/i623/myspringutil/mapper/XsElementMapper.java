@@ -1,8 +1,9 @@
 package cn.i623.myspringutil.mapper;
 
 import cn.i623.myspringutil.domain.XsElement;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface XsElementMapper {
     int deleteByPrimaryKey(@Param("eleSn") Integer eleSn, @Param("isDel") Integer isDel);
@@ -19,4 +20,7 @@ public interface XsElementMapper {
 
     List<Integer> selectEleSn();
 
+    int updateElementcodeAndGroupAndParentgroupByTemplateSnAndEleName(@Param("updatedElementcode") String updatedElementcode
+            , @Param("updatedGroup") String updatedGroup, @Param("updatedParentgroup") String updatedParentgroup
+            , @Param("templateSn") String templateSn, @Param("eleName") String eleName);
 }

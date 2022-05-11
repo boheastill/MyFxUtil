@@ -134,4 +134,10 @@
         from xs_template
         where template_sn=#{templateSn,jdbcType=VARCHAR}
     </select>
+  <select id="selectTemplateSnByNode" resultType="java.lang.String">
+        <!--@mbg.generated-->
+        select template_sn
+        from xs_template
+        where node=#{node,jdbcType=VARCHAR}
+    </select>
 </mapper>
