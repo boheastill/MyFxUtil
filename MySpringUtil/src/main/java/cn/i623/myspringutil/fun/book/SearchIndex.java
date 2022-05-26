@@ -18,9 +18,13 @@ public class SearchIndex {
     public final static String TRAIL = ".txt";
     public static List<String> TIME_RECORD = new LinkedList<>();
 
-    public static void BookAction(String fileName) throws IOException {
+    public static void main(String[] args) throws IOException {
+        BookAction("大圣传","DaShengChuan");
+    }
+
+    public static void BookAction(String fileName,String filePyName) throws IOException {
         List<String> pyName = getPyName(fileName);//TODO 多音字校验
-        String filePyName = pyName.get(0);
+//        String filePyName = pyName.get(0);
         findinit(filePyName);
         // 访问
         // 搜索页
@@ -64,6 +68,4 @@ public class SearchIndex {
             System.out.println("delete" + delete);
         }
     }
-
-
 }

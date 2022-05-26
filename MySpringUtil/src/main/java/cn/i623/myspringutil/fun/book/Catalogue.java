@@ -20,9 +20,9 @@ import static cn.i623.myspringutil.fun.book.util.Web.getResult;
 
 public class Catalogue {
 
-    public final static String WEB_BASE_SITE = "https://m.soxs.cc";
+    public final static String WEB_BASE_SITE = "https://m.soxs.cc/";
     public static Boolean ignore = true;
-    public static String ignoreEndSte = "117";
+    public static String ignoreEndStr = "我怎么做起小说来";
 
     /*
 
@@ -37,12 +37,22 @@ public class Catalogue {
 
     *
     * */
+    //TODO 一次保存
     public static StringBuilder eachPageSave(List<ChapterTitle> chapterTitleList, String filePyName) throws IOException {
         StringBuilder sb = new StringBuilder();
         for (ChapterTitle chapterTitle : chapterTitleList) {
             recordTime(ProcessNodeEnum.PAGE_START);
-            Page page = getPage(WEB_BASE_SITE + chapterTitle.getPageUrl());
+            if (chapterTitle.getName().indexOf(ignoreEndStr) != -1) {
+                System.out.println("搜索成功");
+                ignore = false;
+            }
+            if (ignore) {
+                System.out.println("跳过:" + chapterTitle.getName());
+                continue;
+            }
+            System.out.println("保存:" + chapterTitle.getName());
             //记录问题页
+            Page page = getPage(WEB_BASE_SITE + chapterTitle.getPageUrl());
             if (!page.getNormal()) {
                 sb.append(page + "\n");
             }

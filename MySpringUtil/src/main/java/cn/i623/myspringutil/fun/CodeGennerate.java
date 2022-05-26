@@ -1,13 +1,14 @@
 package cn.i623.myspringutil.fun;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CodeGennerate {
     public static boolean writejavaCode(File file, List<String> rawList) {
         boolean flag = false;
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "UTF-8"));) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8))) {
             file.createNewFile();
             for (String raw : rawList) {
                 bufferedWriter.write(raw);
@@ -23,7 +24,7 @@ public class CodeGennerate {
 
     public static boolean writejavaCode(File file, List<String> rawList, String title, Boolean append) {
         boolean flag = false;
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, append), "UTF-8"));) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, append), StandardCharsets.UTF_8))) {
             file.createNewFile();
             bufferedWriter.write(title);
             bufferedWriter.newLine();

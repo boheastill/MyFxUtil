@@ -29,7 +29,7 @@ public class PageNumbersWatermark extends PdfPageEventHelper {
 
     public static final String oldPath = "C:\\Users\\28442\\Desktop\\hy.pdf";
     public static final String newPath = "C:\\Users\\28442\\Desktop\\hy_Chane.pdf";
-    private static Queue<Integer> queue = new LinkedList<>();
+    private static final Queue<Integer> queue = new LinkedList<>();
 
     public static void processNewPDF() throws IOException, DocumentException {
 

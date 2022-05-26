@@ -32,7 +32,7 @@ public class IORecord {
 //            System.out.println("    存在");
             CodeGennerate.writejavaCode(file, page.getRawList(), page.getTitle(), true);
         } else {
-            System.out.println("    X");
+            System.out.println("创建文件" + filePyName);
             if (file.createNewFile()) {
                 CodeGennerate.writejavaCode(file, page.getRawList(), page.getTitle(), false);
             }
