@@ -38,14 +38,14 @@ public class KeyPress {
 // robot.keyRelease(KeyEvent.VK_W);
         robot.keyPress(KeyEvent.VK_N);
         robot.keyRelease(KeyEvent.VK_N);
-    }
-
+    }//1111222333444455556666777888999
+///////////1
     public static void main(String[] args) throws IOException {
         try {
             Robot robot = new Robot();
             pressKeyCtrlAlt(robot);
 //robot.keyPress(KeyEvent.VK_SPACE);
-        } catch (AWTException e) {
+        } catch (AWTException e) {//zzz
             e.printStackTrace();
         }
     }

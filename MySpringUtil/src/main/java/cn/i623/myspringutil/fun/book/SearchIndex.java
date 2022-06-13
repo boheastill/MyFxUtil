@@ -17,13 +17,21 @@ public class SearchIndex {
     public final static String SAVE_BASE_FILE = "D:\\down\\webGet\\";
     public final static String TRAIL = ".txt";
     public static List<String> TIME_RECORD = new LinkedList<>();
+    public static String ignoreEndStr = "韩信的口信";
+
 
     public static void main(String[] args) throws IOException {
-        BookAction("大圣传","DaShengChuan");
+        BookAction("家父汉高祖");
     }
 
-    public static void BookAction(String fileName,String filePyName) throws IOException {
+    public static void BookAction(String fileName) throws IOException {
         List<String> pyName = getPyName(fileName);//TODO 多音字校验
+        String filePyName = pyName.get(0);
+        BookAction("",filePyName);
+    }
+
+        public static void BookAction(String fileName,String filePyName) throws IOException {
+//        List<String> pyName = getPyName(fileName);//TODO 多音字校验
 //        String filePyName = pyName.get(0);
         findinit(filePyName);
         // 访问

@@ -36,7 +36,7 @@ public class IORecord {
             if (file.createNewFile()) {
                 CodeGennerate.writejavaCode(file, page.getRawList(), page.getTitle(), false);
             }
-        }
+        }///////////////////////////////////
     }
 
 }

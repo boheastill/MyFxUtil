@@ -14,6 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static cn.i623.myspringutil.fun.book.Chapter.getPage;
+import static cn.i623.myspringutil.fun.book.SearchIndex.ignoreEndStr;
 import static cn.i623.myspringutil.fun.book.util.IORecord.recordTime;
 import static cn.i623.myspringutil.fun.book.util.IORecord.save2File;
 import static cn.i623.myspringutil.fun.book.util.Web.getResult;
@@ -22,7 +23,6 @@ public class Catalogue {
 
     public final static String WEB_BASE_SITE = "https://m.soxs.cc/";
     public static Boolean ignore = true;
-    public static String ignoreEndStr = "我怎么做起小说来";
 
     /*
 
@@ -42,7 +42,7 @@ public class Catalogue {
         StringBuilder sb = new StringBuilder();
         for (ChapterTitle chapterTitle : chapterTitleList) {
             recordTime(ProcessNodeEnum.PAGE_START);
-            if (chapterTitle.getName().indexOf(ignoreEndStr) != -1) {
+            if ("".equals(ignoreEndStr)||chapterTitle.getName().indexOf(ignoreEndStr) != -1) {
                 System.out.println("搜索成功");
                 ignore = false;
             }
