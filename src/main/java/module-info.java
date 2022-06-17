@@ -14,7 +14,7 @@ module cn.i623.myfxutil {
     exports cn.i623.myfxutil.contorl;
 
     requires org.apache.pdfbox;
-    opens org.apache.pdfbox;
+
 
     opens cn.i623.myfxutil to javafx.fxml;
     opens cn.i623.myfxutil.contorl;

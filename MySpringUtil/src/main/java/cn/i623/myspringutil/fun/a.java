@@ -10,7 +10,9 @@ public class a {
     }
 
     public static void main(String[] args) {
-
+        double oneMan = 0.05  * 6;
+        System.out.println(oneMan);
+        System.out.println(oneMan*1000);
         myJavaCallback(codeBlock);
     }
 
