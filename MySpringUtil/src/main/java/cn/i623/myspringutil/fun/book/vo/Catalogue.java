@@ -11,15 +11,12 @@ public class Catalogue {
         this.name = name;
         this.pageUrl = pageUrl;
     }
-
     public Catalogue() {
     }
-
     @Override
     public String toString() {
-        String sb = "{" + "\"name\":\"" + name + '\"' +
+        return "{" + "\"name\":\"" + name + '\"' +
                 ",\"cataUrl\":\"" + pageUrl + '\"' +
                 '}';
-        return sb;
     }
 }

@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public interface CataChapParseI {
+
     /**
      * 获取目录列表
      */
@@ -15,10 +16,13 @@ public interface CataChapParseI {
     /**
      * 获取完整目录
      */
-    void getFullCata(String url, LinkedList<Catalogue> catalogue);
+    void getFullCata(String url, LinkedList<Catalogue> catalogue,String baseUrl);
 
     /**
      * 获取正文
      */
     Chapter getChapter(String url);
+
+    String getBaseUrl();
+    String getSimpUrl();
 }

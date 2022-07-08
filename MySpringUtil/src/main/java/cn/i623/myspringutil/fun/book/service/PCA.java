@@ -19,13 +19,13 @@ public class PCA implements CataChapParseI {
     @Override
     public List<Catalogue> getCataList(String url) {
         List<Catalogue> rawList = new LinkedList<>();
-        Catalogue catalogue1 = new Catalogue("", "/booktxt/85241200116/");
+        Catalogue catalogue1 = new Catalogue("单页目录", url);
         rawList.add(catalogue1);
         return rawList;
     }
 
     @Override
-    public void getFullCata(String url, LinkedList<Catalogue> catalogue) {
+    public void getFullCata(String url, LinkedList<Catalogue> catalogue, String baseUrl) {
         String result = getResult(url);
         Document doc = Jsoup.parse(result);
         Element body = doc.body();
@@ -39,7 +39,7 @@ public class PCA implements CataChapParseI {
             //得到节点的值
             String href = x.attributes().get("href");
             String name = x.childNode(0).toString();
-            Catalogue chapterTitle = new Catalogue(name, href);
+            Catalogue chapterTitle = new Catalogue(name, baseUrl + href);
             catalogue.add(chapterTitle);
         }
     }
@@ -85,4 +85,23 @@ public class PCA implements CataChapParseI {
         chapter.setRaw(rawList.size());
         return chapter;
     }
+
+
+    /**
+     * ROOT网址，结尾无/
+     */
+    @Override
+    public String getBaseUrl() {
+        return "https://www.qu-la.com";
+//        return "http://www.biquge.com.tw";
+    }
+
+    /**
+     * 相对网址，开头有/
+     */
+    @Override
+    public String getSimpUrl() {
+        return "/booktxt/85241200116/";
+    }
+
 }

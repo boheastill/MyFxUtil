@@ -15,12 +15,25 @@ import java.util.List;
 import static cn.i623.myspringutil.fun.book.util.IORecord.recordTime;
 import static cn.i623.myspringutil.fun.book.util.Web.getResult;
 
+@SuppressWarnings("unused")
 public class MobileA implements CataChapParseI {
 
-//    aim wlb,gtb 7 1h
+    //    aim wlb,gtb 7 1h
 //    学习以检验为真理，个人时间第一优先级。
 //    外出以英语和参与为主要目标
 //    工作以下次要求为本次目标
+    @Override
+    public String getBaseUrl() {
+        return "https://m.soxs.cc/";
+    }
+
+    /**
+     * 相对网址，开头有/
+     */
+    @Override
+    public String getSimpUrl() {
+        return "/booktxt/85241200116/";
+    }
 
     @Override
     public List<Catalogue> getCataList(String url) {
@@ -49,7 +62,8 @@ public class MobileA implements CataChapParseI {
     }
 
     @Override
-    public void getFullCata(String url, LinkedList<Catalogue> catalogue) {
+    public void getFullCata(String url, LinkedList<Catalogue> catalogue, String baseUrl) {
+
 
         String result = getResult(url);
         Document doc = Jsoup.parse(result);
@@ -64,7 +78,7 @@ public class MobileA implements CataChapParseI {
                 Node node3 = node2.childNode(0).childNode(0);
                 String href = node2.childNode(0).attributes().get("href");
                 Catalogue chapterTitle = new Catalogue();
-                chapterTitle.setPageUrl(href);
+                chapterTitle.setPageUrl(baseUrl + href);
                 chapterTitle.setName(node3.toString());
                 catalogue.add(chapterTitle);
             }

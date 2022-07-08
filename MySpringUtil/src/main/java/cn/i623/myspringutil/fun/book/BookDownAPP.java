@@ -17,52 +17,58 @@ import static cn.i623.myspringutil.fun.book.util.IORecord.recordTime;
 import static cn.i623.myspringutil.fun.book.util.IORecord.save2File;
 
 public class BookDownAPP {
-    public static final String SAVE_BASE_FILE = "D:\\down\\webGet\\";
+    private static final CataChapParseI cataChapParseI = new PCA();
+    public static final String SAVE_BASE_FILE = "D:\\down\\webGet";
     public static final String TRAIL = ".txt";
     public static List<String> TIME_RECORD = new LinkedList<>();
-    public String ignoreEndStr = "";
 
-    CataChapParseI cataChapParseI;
 
-    public void main(String[] args) throws IOException {
-        cataChapParseI = new PCA();
-        BookAction("神王权杖");
+    public static void main(String[] args) throws IOException {
+        String fileName = "末日";
+        String chapterStartKey = "";
+        new BookDownAPP().bookStart(fileName, chapterStartKey);
     }
 
-    //    public final  String WEB_BASE_SITE = "https://m.soxs.cc/";
-//    public final  String WEB_BASE_SITE = "https://m.23xstxt.com/";
-    public final String WEB_BASE_SITE = "https://www.qu-la.com";
-    public Boolean ignore = true;
+    public void bookStart(String fileName, String chapterStartKey) throws IOException {
+        //1.参数与初始化
+        List<String> pyNameList = getPyName(fileName);//TODO 多音字校验
+        String pyName = pyNameList.get(0);
+        String baseUrl = cataChapParseI.getBaseUrl();
+        String simpUrl = cataChapParseI.getSimpUrl();
 
-    /*
+        findinit(pyName);
+        // 获得目录列表
+        List<Catalogue> splitCataList = cataChapParseI.getCataList(baseUrl + simpUrl);
+        // 获得完整目录//TODO 异步
+        LinkedList<Catalogue> catalogueList = new LinkedList<>();
+        for (Catalogue splitCata : splitCataList) {
+            String url = splitCata.getPageUrl();
+            cataChapParseI.getFullCata(url, catalogueList, baseUrl);
+            recordTime(ProcessStatu.CATA_END);
+        }
+        // 正文
+        StringBuilder sb = eachPageSave(catalogueList, pyName, chapterStartKey);
+        findEnd(sb, pyName);
+    }
 
-            for (WebResponse2TXT.ChapterTitle chapterTitle : chapterTitleList) {
-            System.out.println("chapterTitle:" + chapterTitle.getName());
-            if (chapterTitle.getName().indexOf(ignoreEndSte) != -1) {
-                ignore = false;
-            }
-            if (ignore) {
-                continue;
-            }
+    private Boolean ignore = true;
 
-    *
-    * */
     //TODO 一次保存
-    public StringBuilder eachPageSave(List<Catalogue> catalogueList, String filePyName) throws IOException {
+    public StringBuilder eachPageSave(List<Catalogue> catalogueList, String filePyName, String chapterStartKey) throws IOException {
         StringBuilder sb = new StringBuilder();
         for (Catalogue catalogue : catalogueList) {
             recordTime(ProcessStatu.PAGE_START);
-            if ("".equals(ignoreEndStr) || catalogue.getName().contains(ignoreEndStr)) {
-                System.out.println("匹配到:" + catalogue.getName());
+            if ("".equals(chapterStartKey) || catalogue.getName().contains(chapterStartKey)) {
+//                System.out.println("匹配到:" + catalogue.getName());
                 ignore = false;
             }
             if (ignore) {
-                System.out.println("跳过:" + catalogue.getName());
+//                System.out.println("跳过:" + catalogue.getName());
                 continue;
             }
             System.out.println("保存:" + catalogue.getName());
             //保存单页逻辑
-            Chapter chapter = cataChapParseI.getChapter(WEB_BASE_SITE + catalogue.getPageUrl());
+            Chapter chapter = cataChapParseI.getChapter(catalogue.getPageUrl());
             //记录问题页
             if (!chapter.getNormal()) {
                 sb.append(chapter).append("\n");
@@ -71,32 +77,6 @@ public class BookDownAPP {
             save2File(chapter, filePyName);
         }
         return sb;
-    }
-
-    public void BookAction(String fileName) throws IOException {
-        List<String> pyName = getPyName(fileName);//TODO 多音字校验
-        String filePyName = pyName.get(0);
-        BookAction("", filePyName);
-    }
-
-    public void BookAction(String fileName, String filePyName) throws IOException {
-//        List<String> pyName = getPyName(fileName);//TODO 多音字校验
-//        String filePyName = pyName.get(0);
-        findinit(filePyName);
-        // 获得目录列表
-        List<Catalogue> splitCataList = cataChapParseI.getCataList(WEB_BASE_SITE + filePyName);
-        // 获得完整目录
-        LinkedList<Catalogue> catalogueList = new LinkedList<>();
-        //TODO 异步
-        for (Catalogue splitCata : splitCataList) {
-            String url = WEB_BASE_SITE + splitCata.getPageUrl();
-//            System.out.println(chapterTitleList);
-            cataChapParseI.getFullCata(url, catalogueList);
-            recordTime(ProcessStatu.CATA_END);
-        }
-        // 正文
-        StringBuilder sb = eachPageSave(catalogueList, filePyName);
-        findEnd(sb, filePyName);
     }
 
 
