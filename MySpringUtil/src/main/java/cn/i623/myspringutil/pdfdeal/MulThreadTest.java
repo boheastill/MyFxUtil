@@ -13,17 +13,13 @@ public class MulThreadTest {
     public static final String FILE_FULL_NAME = "1.pdf";
 //    public static final String FILE_FULL_NAME = "任光新卷宗.pdf";
 
-
     public static void main(String[] args) {
         TimeStatic.recordTime(TimeStatic.ProcessNodeEnum.TASK_START);
         String filePath = BASE_PATH + FILE_FULL_NAME;
         String imagePath = filePath.replace(".pdf", "");
         String fileName = FILE_FULL_NAME.replace(".pdf", "");
-
         ImageUtils.pdf2image(filePath, fileName,  imagePath);
-
-
         TimeStatic.recordTime(TimeStatic.ProcessNodeEnum.TASK_END);
-        System.out.println(TimeStatic.TIME_RECORD);
+        System.out.println(TimeStatic.TIME_RECORD);//xxxxxx
     }
 }

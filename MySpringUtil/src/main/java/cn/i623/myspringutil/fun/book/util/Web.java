@@ -10,7 +10,7 @@ public class Web {
      * 传入地址，返回get结果，无值会重试3次
      */
     public static String getResult(String url) {
-        String result = "";
+        String result;
         int i = 0;
         //如果返回长度0，重试10次 todo PARAM加时间戳避免缓存
         do {
@@ -28,7 +28,7 @@ public class Web {
      * @return URL 所代表远程资源的响应结果
      */
     public static String sendGet(String url, String param) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         BufferedReader bufferedReader = null;
         try {
             String urlNameString = url + "?" + param;
@@ -42,6 +42,7 @@ public class Web {
             connection.setRequestProperty("user-agent", "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.155 Safari/537.36");
             // 建立实际的连接
             connection.connect();
+
             // 获取所有响应头字段
 //            Map<String, List<String>> map = connection.getHeaderFields();
             // 遍历所有的响应头字段
@@ -49,10 +50,17 @@ public class Web {
 ////                System.out.println(key + "--->" + map.get(key));
 //            }
             // 定义 BufferedReader输入流来读取URL的响应
-            bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            //获取网址编码格式
+            String contentType = connection.getContentType();
+            contentType = contentType.substring(contentType.indexOf("charset=") + 8);
+//            System.out.println("contentType:" + contentType);
+            //设置编码格式
+            bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream(), contentType));
+
+
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                result += line;
+                result.append(line);
             }
         } catch (Exception e) {
             System.out.println("发送GET请求出现异常！" + e);
@@ -68,6 +76,6 @@ public class Web {
                 e2.printStackTrace();
             }
         }
-        return result;
+        return result.toString();
     }
 }

@@ -22,7 +22,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static com.turing.utils.pdfdeal.MulThreadUtil.listMulThreadDealOld;
+import static cn.i623.myspringutil.pdfdeal.MulThreadUtil.listMulThreadDealOld;
 
 
 public class ImageUtils {

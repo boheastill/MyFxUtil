@@ -1,0 +1,20 @@
+<component name="libraryTable">
+  <library name="Maven: com.github.librepdf:openpdf:1.3.27">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/librepdf/openpdf/1.3.27/openpdf-1.3.27.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/librepdf/openpdf/1.3.27/openpdf-1.3.27-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/github/librepdf/openpdf/1.3.27/openpdf-1.3.27-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../OpenPDF-master.zip!/OpenPDF-master/openpdf-fonts-extra/src/main/java" />
+      <root url="jar://$PROJECT_DIR$/../../OpenPDF-master.zip!/OpenPDF-master/openpdf-fonts-extra/src/test/java" />
+      <root url="jar://$PROJECT_DIR$/../../OpenPDF-master.zip!/OpenPDF-master/openpdf/src/main/java" />
+      <root url="jar://$PROJECT_DIR$/../../OpenPDF-master.zip!/OpenPDF-master/openpdf/src/test/java" />
+      <root url="jar://$PROJECT_DIR$/../../OpenPDF-master.zip!/OpenPDF-master/pdf-swing/src/main/java" />
+      <root url="jar://$PROJECT_DIR$/../../OpenPDF-master.zip!/OpenPDF-master/pdf-toolbox/src/main/java" />
+      <root url="jar://$PROJECT_DIR$/../../OpenPDF-master.zip!/OpenPDF-master/pdf-toolbox/src/test/java" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,6 +1,6 @@
 package cn.i623.myspringutil.fun.book.vo;
 
-public enum ProcessNodeEnum {
+public enum ProcessStatu {
     TASK_START("任务开始"), TASK_END("任务结束"),
     DOWNLOAD_START("下载开始"), DOWNLOAD_END("下载结束"),
     PRISE_START("解析处理开始"), PRISE_END("解析处理结束"),
@@ -13,7 +13,7 @@ public enum ProcessNodeEnum {
 
     private final String name;
 
-    ProcessNodeEnum(String name) {
+    ProcessStatu(String name) {
         this.name = name;
 
     }
