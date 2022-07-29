@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MyFxUtil.iml" filepath="$PROJECT_DIR$/MyFxUtil.iml" />
       <module fileurl="file://$PROJECT_DIR$/MySpringUtil/MySpringUtil.iml" filepath="$PROJECT_DIR$/MySpringUtil/MySpringUtil.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MySpringUtil/pdfSplitjava/pdfSplitjava.iml" filepath="$PROJECT_DIR$/MySpringUtil/pdfSplitjava/pdfSplitjava.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pdfsplitGui/pdfsplitGui.iml" filepath="$PROJECT_DIR$/pdfsplitGui/pdfsplitGui.iml" />
     </modules>
   </component>
 </project>

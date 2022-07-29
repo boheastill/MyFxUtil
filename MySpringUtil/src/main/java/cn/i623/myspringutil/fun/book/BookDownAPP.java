@@ -16,16 +16,28 @@ import static cn.i623.myspringutil.fun.book.util.ChangeToPinYinJP.getPyName;
 import static cn.i623.myspringutil.fun.book.util.IORecord.recordTime;
 import static cn.i623.myspringutil.fun.book.util.IORecord.save2File;
 
+/**
+ * 多线程问题
+ * 1.目录分页、目录、章节哪些需要多线程？
+ * 2.如何实现 现有的从某章节开始保存？
+ * 3.章节顺序乱序问题
+ * 4.用哈希表写能否保证线程一致性？
+ * 5.除了fututer处，其他地方如何阻塞，等待线程执行完毕。
+ * 建议：
+ * 开新分支，大幅重写
+ * 工具化 循环的 多线程 与 适时阻塞处理业务
+ * 方案 新文件格式、map排序、多文件合并、数据库预保存
+ */
 public class BookDownAPP {
     private static final CataChapParseI cataChapParseI = new PCA();
-    public static final String SAVE_BASE_FILE = "D:\\down\\webGet";
+    public static final String SAVE_BASE_FILE = "D:\\down\\webGet\\";
     public static final String TRAIL = ".txt";
     public static List<String> TIME_RECORD = new LinkedList<>();
 
 
     public static void main(String[] args) throws IOException {
-        String fileName = "末日";
-        String chapterStartKey = "";
+        String fileName = "诸界末日在线";
+        String chapterStartKey = "久别之后的重逢";
         new BookDownAPP().bookStart(fileName, chapterStartKey);
     }
 
@@ -76,6 +88,7 @@ public class BookDownAPP {
             recordTime(ProcessStatu.SAVE_START);
             save2File(chapter, filePyName);
         }
+
         return sb;
     }
 

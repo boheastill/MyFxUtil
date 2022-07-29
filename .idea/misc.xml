@@ -5,6 +5,9 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/MySpringUtil/pom.xml" />
+        <option value="$PROJECT_DIR$/MySpringUtil/pdfSplitjava/pom.xml" />
+        <option value="$PROJECT_DIR$/pdfSplitjava/pom.xml" />
+        <option value="$PROJECT_DIR$/pdfsplitGui/pom.xml" />
       </list>
     </option>
   </component>
